@@ -43,6 +43,11 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
 
+    //Ion - Android Asynchronous Networking and Image Loading
+    implementation 'com.koushikdutta.ion:ion:3.1.0'
+    //Picasso - Allows for hassle-free image loading
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
