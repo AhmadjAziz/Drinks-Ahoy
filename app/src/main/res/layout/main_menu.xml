@@ -17,10 +17,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello" />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="getBeerInfo">
+
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -33,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
-            android:text="Download" />
+            android:text="Button" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
