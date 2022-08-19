@@ -57,12 +57,13 @@ class MainActivity : AppCompatActivity() {
 //        processPair(beerJson)
     }
 
+    //processes strength data and extracts it into a string format.
     private fun processStrength(beerJson: JSONArray) {
-        val strengrthData = beerJson
+        val strengthData = beerJson
             .getJSONObject(0)
             .getString("abv")
         val nameView = findViewById<TextView>(R.id.strength)
-        nameView.text = "Strength: " + strengrthData
+        nameView.text = "Strength: " + strengthData
     }
 
     //extracts the name of the beer.
