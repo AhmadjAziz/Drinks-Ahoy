@@ -10,6 +10,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import com.google.android.material.card.MaterialCardView
 import com.google.gson.JsonArray
 import com.koushikdutta.ion.Ion
 import com.squareup.picasso.Picasso
@@ -24,17 +28,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_menu)
 
+        //displays a random beer onCreate when app is launched
+        callAPI()
+
+
         //button press connects android to punk api to fetch a random beer data
         val nextBeerBtn = findViewById<Button>(R.id.button)
         nextBeerBtn.setOnClickListener {
-            Ion.with(this)
-                .load("https://api.punkapi.com/v2/beers/random")
-                .asString()
-                .setCallback { e, result -> processBeer(result) }
+            callAPI()
             }
-
         }
 
+    private fun callAPI(){
+        Ion.with(this)
+            .load("https://api.punkapi.com/v2/beers/random")
+            .asString()
+            .setCallback { e, result -> processBeer(result) }
+    }
     //Passes data into methods where they can be extracted
     private fun processBeer(beerData: String) {
 
