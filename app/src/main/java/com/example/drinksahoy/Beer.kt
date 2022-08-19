@@ -8,11 +8,10 @@ data class Beer (
     val description: String?,
     val food_pair: String?
 ){
-    class Beer(){
-
-    }
-    override fun toString(): String {
+     override fun toString(): String {
         return super.toString()
-        return "$image_url,$name,$strength,$tagline,$description,$food_pair"
+         //TODO use a different delimeter than comma so data can be parsed.
+        return "$image_url;$name;$strength;$tagline;$description;$food_pair"
+
     }
 }
