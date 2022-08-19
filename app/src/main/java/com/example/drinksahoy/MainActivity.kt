@@ -1,17 +1,21 @@
 package com.example.drinksahoy
 
 import android.media.Image
+import android.nfc.tech.TagTechnology
 import android.os.Bundle
 import android.util.JsonReader
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.JsonArray
 import com.koushikdutta.ion.Ion
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
+import org.json.JSONObject
+import org.w3c.dom.Text
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,18 +35,38 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-    //Processes the data fetched from punk api and displays it.
+    //Passes data into methods where they can be extracted
     private fun processBeer(beerData: String) {
+
         val beerJson = JSONArray(beerData)
-        val url = beerJson
+        processImage(beerJson)
+        processName(beerJson)
+//        processStrength(beerData)
+//        processTagline(beerData)
+//        processDesc(beerData)
+//        processPair(beerData)
+    }
+
+    //extracts the name of the beer.
+    private fun processName(beerJson: JSONArray) {
+
+        val nameData = beerJson
+            .getJSONObject(0)
+            .getString("name")
+        val nameView = findViewById<TextView>(R.id.name)
+        nameView.text = "Name: " + nameData
+    }
+
+    //extracts image url from the Json array and inserts it into the image view.
+    private fun processImage(beerJson: JSONArray) {
+
+        val image_url = beerJson
             .getJSONObject(0)
             .getString("image_url")
-
         val imgView = findViewById<ImageView>(R.id.imageView)
-
         Picasso
             .get()
-            .load(url)
+            .load(image_url)
             .into(imgView)
     }
 }
