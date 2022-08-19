@@ -26,7 +26,7 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-    private val currentBeer = null
+    var currentBeer = Beer(null,null,null,null,null,null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
