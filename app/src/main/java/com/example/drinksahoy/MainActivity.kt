@@ -52,9 +52,17 @@ class MainActivity : AppCompatActivity() {
         processImage(beerJson)
         processName(beerJson)
         processStrength(beerJson)
-//        processTagline(beerJson)
+        processTagline(beerJson)
 //        processDesc(beerJson)
 //        processPair(beerJson)
+    }
+
+    private fun processTagline(beerJson: JSONArray) {
+        val taglineData = beerJson
+            .getJSONObject(0)
+            .getString("tagline")
+        val nameView = findViewById<TextView>(R.id.tagline)
+        nameView.text = "Tagline: " + taglineData
     }
 
     //processes strength data and extracts it into a string format.
