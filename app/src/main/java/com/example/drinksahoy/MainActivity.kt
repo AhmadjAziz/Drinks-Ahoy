@@ -51,10 +51,18 @@ class MainActivity : AppCompatActivity() {
         val beerJson = JSONArray(beerData)
         processImage(beerJson)
         processName(beerJson)
-//        processStrength(beerData)
-//        processTagline(beerData)
-//        processDesc(beerData)
-//        processPair(beerData)
+        processStrength(beerJson)
+//        processTagline(beerJson)
+//        processDesc(beerJson)
+//        processPair(beerJson)
+    }
+
+    private fun processStrength(beerJson: JSONArray) {
+        val strengrthData = beerJson
+            .getJSONObject(0)
+            .getString("abv")
+        val nameView = findViewById<TextView>(R.id.strength)
+        nameView.text = "Strength: " + strengrthData
     }
 
     //extracts the name of the beer.
