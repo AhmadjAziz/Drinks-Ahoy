@@ -1,5 +1,6 @@
 package com.example.drinksahoy
 
+import android.content.Intent
 import android.media.Image
 import android.nfc.tech.TagTechnology
 import android.os.Bundle
@@ -29,7 +30,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_menu)
 
         //displays a random beer onCreate when app is launched
-        callAPI()
+        if(intent.extras == null){
+            callAPI()
+        }else{
+            //TODO print the preexisting beer.
+        }
+
 
 
         //button press connects android to punk api to fetch a random beer data
@@ -37,7 +43,15 @@ class MainActivity : AppCompatActivity() {
         nextBeerBtn.setOnClickListener {
             callAPI()
             }
+
+        //On card click go into more detail on beer.
+        val cardClick = findViewById<CardView>(R.id.beerCard)
+        cardClick.setOnClickListener{
+            val intent = Intent(this,MoreInfoMenu::class.java)
+            startActivity(intent)
         }
+
+    }
 
     private fun callAPI(){
         Ion.with(this)
