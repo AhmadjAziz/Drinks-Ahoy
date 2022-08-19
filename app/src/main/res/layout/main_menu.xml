@@ -44,6 +44,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/food_pair"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -54,14 +54,22 @@ class MainActivity : AppCompatActivity() {
         processStrength(beerJson)
         processTagline(beerJson)
         processDesc(beerJson)
-//        processPair(beerJson)
+        processPair(beerJson)
+    }
+
+    private fun processPair(beerJson: JSONArray) {
+        val pairData = beerJson
+            .getJSONObject(0)
+            .getString("food_pairing")
+        val nameView = findViewById<TextView>(R.id.food_pair)
+        nameView.text = "Food Pairing: $pairData"
     }
 
     private fun processDesc(beerJson: JSONArray) {
         val descData = beerJson
             .getJSONObject(0)
             .getString("description")
-        val nameView = findViewById<TextView>(R.id.tagline)
+        val nameView = findViewById<TextView>(R.id.description)
         nameView.text = "Description: $descData"
     }
 
