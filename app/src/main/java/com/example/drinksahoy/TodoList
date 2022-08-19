@@ -1,5 +1,6 @@
 - Separate food pair (Important)
 - learn data class or other methods to compute data
-- Improve the way data is transferred between intents.
-- Work on a recyclerView.
-- use Ion to download data into the recycler view.
+- Improve the way data is transferred between intents
+- add image for high abv value (important)
+- Work on a recyclerView
+- use Ion to download data into the recycler view
