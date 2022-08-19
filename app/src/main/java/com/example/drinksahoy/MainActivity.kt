@@ -53,8 +53,16 @@ class MainActivity : AppCompatActivity() {
         processName(beerJson)
         processStrength(beerJson)
         processTagline(beerJson)
-//        processDesc(beerJson)
+        processDesc(beerJson)
 //        processPair(beerJson)
+    }
+
+    private fun processDesc(beerJson: JSONArray) {
+        val descData = beerJson
+            .getJSONObject(0)
+            .getString("description")
+        val nameView = findViewById<TextView>(R.id.tagline)
+        nameView.text = "Description: $descData"
     }
 
     private fun processTagline(beerJson: JSONArray) {
@@ -62,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             .getJSONObject(0)
             .getString("tagline")
         val nameView = findViewById<TextView>(R.id.tagline)
-        nameView.text = "Tagline: " + taglineData
+        nameView.text = "Tagline: $taglineData"
     }
 
     //processes strength data and extracts it into a string format.
@@ -71,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             .getJSONObject(0)
             .getString("abv")
         val nameView = findViewById<TextView>(R.id.strength)
-        nameView.text = "Strength: " + strengthData
+        nameView.text = "Strength: $strengthData"
     }
 
     //extracts the name of the beer.
@@ -81,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             .getJSONObject(0)
             .getString("name")
         val nameView = findViewById<TextView>(R.id.name)
-        nameView.text = "Name: " + nameData
+        nameView.text = "Name: $nameData"
     }
 
     //extracts image url from the Json array and inserts it into the image view.
