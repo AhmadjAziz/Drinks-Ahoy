@@ -1,31 +1,27 @@
 package com.example.drinksahoy
 
 import android.content.Intent
-import android.media.Image
-import android.nfc.tech.TagTechnology
 import android.os.Bundle
-import android.util.JsonReader
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import com.google.android.material.card.MaterialCardView
-import com.google.gson.JsonArray
 import com.koushikdutta.ion.Ion
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.processNextEventInCurrentThread
 import org.json.JSONArray
-import org.json.JSONObject
-import org.w3c.dom.Text
+import java.io.Serializable
 
 
 class MainActivity : AppCompatActivity() {
 
+    //Variables used to store data on beer.
+    private var imageUrl: String? = null
+    private var name: String? = null
+    private var strength: Int? = null
+    private var tagline: String? = null
+    private var description: String? = null
+    private var foodPair: String? = null
     var currentBeer = Beer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         if(intent.extras == null){
             callAPI()
         }else{
-
         }
 
         //button press connects android to punk api to fetch a random beer data
@@ -50,90 +45,83 @@ class MainActivity : AppCompatActivity() {
         cardClick.setOnClickListener{
             val intent = Intent(this,MoreInfoMenu::class.java)
                 //TODO Need to improve.
-            intent.putExtra("beer", currentBeer.toString())
+            intent.putExtra("beer", currentBeer as Serializable)
             startActivity(intent)
         }
-
     }
 
     private fun callAPI(){
         Ion.with(this)
             .load("https://api.punkapi.com/v2/beers/random")
             .asString()
-            .setCallback { e, result -> processBeer(result) }
+            .setCallback { ex, result -> processBeer(result) }
     }
+
     //Passes data into methods where they can be extracted
     private fun processBeer(beerData: String) {
         val beerJson = JSONArray(beerData)
-        val image_url =  processImage(beerJson)
-        val name = processName(beerJson)
-        val strength = processStrength(beerJson)
-        val tagline = processTagline(beerJson)
-        val descData = processDesc(beerJson)
-        val pair_data = processPair(beerJson)
-        currentBeer = Beer(image_url, name, strength, tagline, descData, pair_data)
+        processImage(beerJson)
+        processName(beerJson)
+        processStrength(beerJson)
+        processTagline(beerJson)
+        processDesc(beerJson)
+        processPair(beerJson)
+        currentBeer = Beer(imageUrl, name, strength, tagline, description, foodPair)
     }
 
-    private fun processPair(beerJson: JSONArray):String? {
-        val pairData = beerJson
+    private fun processPair(beerJson: JSONArray){
+        foodPair = beerJson
             .getJSONObject(0)
             .getString("food_pairing")
         val nameView = findViewById<TextView>(R.id.food_pair)
-        nameView.text = "Food Pairing: $pairData"
-        return pairData
+        nameView.text = "Food Pairing: $foodPair"
     }
 
-    private fun processDesc(beerJson: JSONArray): String? {
-        val descData = beerJson
+    private fun processDesc(beerJson: JSONArray){
+        description = beerJson
             .getJSONObject(0)
             .getString("description")
         val nameView = findViewById<TextView>(R.id.description)
-        nameView.text = "Description: $descData"
-        return descData
+        nameView.text = "Description: $description"
     }
 
-    private fun processTagline(beerJson: JSONArray): String? {
-        val taglineData = beerJson
+    private fun processTagline(beerJson: JSONArray){
+        tagline = beerJson
             .getJSONObject(0)
             .getString("tagline")
         val nameView = findViewById<TextView>(R.id.tagline)
-        nameView.text = "Tagline: $taglineData"
-        return taglineData
+        nameView.text = "Tagline: $tagline"
     }
 
     //processes strength data and extracts it into a string format.
-    private fun processStrength(beerJson: JSONArray): Int? {
-        val strengthData = beerJson
+    private fun processStrength(beerJson: JSONArray){
+        strength = beerJson
             .getJSONObject(0)
             .getInt("abv")
         val nameView = findViewById<TextView>(R.id.strength)
-        nameView.text = "Strength: $strengthData"
-        return strengthData
+        nameView.text = "Strength: $strength"
     }
 
     //extracts the name of the beer.
-    private fun processName(beerJson: JSONArray):String? {
-
-        val nameData = beerJson
+    private fun processName(beerJson: JSONArray){
+        name = beerJson
             .getJSONObject(0)
             .getString("name")
         val nameView = findViewById<TextView>(R.id.name)
-        nameView.text = "Name: $nameData"
-        return nameData
+        nameView.text = "Name: $name"
     }
 
     //extracts image url from the Json array and inserts it into the image view.
-    private fun processImage(beerJson: JSONArray): String? {
-
-        val image_url = beerJson
+    private fun processImage(beerJson: JSONArray){
+        imageUrl = beerJson
             .getJSONObject(0)
             .getString("image_url")
+
         val imgView = findViewById<ImageView>(R.id.imageView)
         Picasso
             .get()
-            .load(image_url)
+            .load(imageUrl)
             .into(imgView)
-        return image_url
     }
 }
 
