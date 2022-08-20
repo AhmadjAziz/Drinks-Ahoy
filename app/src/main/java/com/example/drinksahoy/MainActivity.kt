@@ -26,7 +26,7 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-    var currentBeer = Beer(null,null,null,null,null,null)
+    var currentBeer = Beer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         val cardClick = findViewById<CardView>(R.id.beerCard)
         cardClick.setOnClickListener{
             val intent = Intent(this,MoreInfoMenu::class.java)
+                //TODO Need to improve.
             intent.putExtra("beer", currentBeer.toString())
             startActivity(intent)
         }
