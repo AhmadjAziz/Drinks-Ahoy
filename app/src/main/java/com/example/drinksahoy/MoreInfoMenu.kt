@@ -11,12 +11,12 @@ class MoreInfoMenu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.more_info_menu)
 
-        val backBtn = findViewById<Button>(R.id.backBtn)
-        backBtn.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            intent.putExtra("lessInfo",getString(R.string.lessInfo))
-            startActivity(intent)
-        }
+//        val backBtn = findViewById<Button>(R.id.backBtn)
+//        backBtn.setOnClickListener{
+//            val intent = Intent(this,MainActivity::class.java)
+//            intent.putExtra("beerInfo",getString(R.string.lessInfo))
+//            startActivity(intent)
+//        }
 
     }
 }

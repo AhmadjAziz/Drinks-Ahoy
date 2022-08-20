@@ -2,6 +2,7 @@ package com.example.drinksahoy
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         cardClick.setOnClickListener{
             val intent = Intent(this,MoreInfoMenu::class.java)
                 //TODO Need to improve.
-            intent.putExtra("beer", currentBeer as Serializable)
+            intent.putExtra("beer", currentBeer)
             startActivity(intent)
         }
     }
@@ -67,30 +68,25 @@ class MainActivity : AppCompatActivity() {
         processDesc(beerJson)
         processPair(beerJson)
         currentBeer = Beer(imageUrl, name, strength, tagline, description, foodPair)
+        postShortInfo()
     }
 
     private fun processPair(beerJson: JSONArray){
         foodPair = beerJson
             .getJSONObject(0)
             .getString("food_pairing")
-        val nameView = findViewById<TextView>(R.id.food_pair)
-        nameView.text = "Food Pairing: $foodPair"
     }
 
     private fun processDesc(beerJson: JSONArray){
         description = beerJson
             .getJSONObject(0)
             .getString("description")
-        val nameView = findViewById<TextView>(R.id.description)
-        nameView.text = "Description: $description"
     }
 
     private fun processTagline(beerJson: JSONArray){
         tagline = beerJson
             .getJSONObject(0)
             .getString("tagline")
-        val nameView = findViewById<TextView>(R.id.tagline)
-        nameView.text = "Tagline: $tagline"
     }
 
     //processes strength data and extracts it into a string format.
@@ -98,8 +94,6 @@ class MainActivity : AppCompatActivity() {
         strength = beerJson
             .getJSONObject(0)
             .getInt("abv")
-        val nameView = findViewById<TextView>(R.id.strength)
-        nameView.text = "Strength: $strength"
     }
 
     //extracts the name of the beer.
@@ -107,8 +101,6 @@ class MainActivity : AppCompatActivity() {
         name = beerJson
             .getJSONObject(0)
             .getString("name")
-        val nameView = findViewById<TextView>(R.id.name)
-        nameView.text = "Name: $name"
     }
 
     //extracts image url from the Json array and inserts it into the image view.
@@ -116,12 +108,29 @@ class MainActivity : AppCompatActivity() {
         imageUrl = beerJson
             .getJSONObject(0)
             .getString("image_url")
+    }
 
+    private fun postShortInfo(){
+
+        //Display beer image.
         val imgView = findViewById<ImageView>(R.id.imageView)
         Picasso
             .get()
-            .load(imageUrl)
+            .load(currentBeer.imageUrl)
             .into(imgView)
+
+        //Display beer name
+        val nameView = findViewById<TextView>(R.id.name)
+        nameView.text = "Name: ${currentBeer.name}"
+
+        //Display the strength of beer
+        //TODO Make sure beer displays strong icon when above 5% abv
+        val strengthView = findViewById<TextView>(R.id.strength)
+        strengthView.text = "Strength: ${currentBeer.strength}"
+
+        //Display the tagline of beer.
+        val taglineView = findViewById<TextView>(R.id.tagline)
+        taglineView.text = "Tagline: ${currentBeer.tagline}"
     }
 }
 
