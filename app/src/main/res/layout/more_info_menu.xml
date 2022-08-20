@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:clickable="true"
         app:cardBackgroundColor="@color/copper"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut">
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut"
+        app:state_dragged="true">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
