@@ -14,7 +14,7 @@ import org.json.JSONArray
 import java.io.Serializable
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     //Variables used to store data on beer.
     private var imageUrl: String? = null
@@ -23,16 +23,17 @@ class MainActivity : AppCompatActivity() {
     private var tagline: String? = null
     private var description: String? = null
     private var foodPair: String? = null
-    var currentBeer = Beer()
+    private var currentBeer = Beer()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_menu)
 
         //displays a random beer onCreate when app is launched
         if(intent.extras == null){
             callAPI()
-        }else{
+        } else{
+            currentBeer = intent.extras!!.get("beerInfo") as Beer
         }
 
         //button press connects android to punk api to fetch a random beer data
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         cardClick.setOnClickListener{
             val intent = Intent(this,MoreInfoMenu::class.java)
                 //TODO Need to improve.
-            intent.putExtra("beer", currentBeer)
+            intent.putExtra("beerInfo", currentBeer as Serializable)
             startActivity(intent)
         }
     }
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Passes data into methods where they can be extracted
-    private fun processBeer(beerData: String) {
+    private fun processBeer(beerData: String){
         val beerJson = JSONArray(beerData)
         processImage(beerJson)
         processName(beerJson)
