@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity(){
         val cardClick = findViewById<CardView>(R.id.beerCard)
         cardClick.setOnClickListener{
             val intent = Intent(this,MoreInfoMenu::class.java)
-                //TODO Need to improve.
             intent.putExtra("beerInfo", currentBeer as Serializable)
             startActivity(intent)
         }

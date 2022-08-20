@@ -1,8 +1,14 @@
 - Separate food pair (Important)
-- learn data class or other methods to compute data
-- Improve the way data is transferred between activities
 - add image for high abv value (important)
+- Add image for beers that return null
+- Kdoc the project
+
 
 	BONUS FEATURE
-- Work on a recyclerView
+- Work on a recyclerView(important)
 - use Ion to download data into the recycler view
+
+Optional Polish
+- Data is lost on screen rotation. Can fix with android lifecycles, or maybe be lazy and just check
+    check if currentBeer is not null then display it
+- Use dokka for documentation instead

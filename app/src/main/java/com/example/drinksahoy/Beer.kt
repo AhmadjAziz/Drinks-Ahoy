@@ -2,6 +2,11 @@ package com.example.drinksahoy
 
 import java.io.Serializable
 
+/**
+ * The following data class defines the attributes of a beer.
+ *@author Ahmad Aziz
+ *@since 20/08/2022
+ */
 data class Beer(
     val imageUrl: String? = null,
     val name: String? = null,
@@ -9,11 +14,4 @@ data class Beer(
     val tagline: String? = null,
     val description: String? = null,
     val foodPair: String? = null
-): Serializable{
-     override fun toString(): String{
-        return super.toString()
-         //TODO use a different delimiter than comma so data can be parsed.
-        return "$imageUrl;$name;$strength;$tagline;$description;$foodPair"
-
-    }
-}
+): Serializable
