@@ -2,7 +2,6 @@ package com.example.drinksahoy
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -34,6 +33,7 @@ class MainActivity : AppCompatActivity(){
             callAPI()
         } else{
             currentBeer = intent.extras!!.get("beerInfo") as Beer
+            shortBeerInfo()
         }
 
         //button press connects android to punk api to fetch a random beer data
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(){
         processDesc(beerJson)
         processPair(beerJson)
         currentBeer = Beer(imageUrl, name, strength, tagline, description, foodPair)
-        postShortInfo()
+        shortBeerInfo()
     }
 
     private fun processPair(beerJson: JSONArray){
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(){
             .getString("image_url")
     }
 
-    private fun postShortInfo(){
+    private fun shortBeerInfo(){
 
         //Display beer image.
         val imgView = findViewById<ImageView>(R.id.imageView)
