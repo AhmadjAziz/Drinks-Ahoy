@@ -2,6 +2,7 @@ package com.example.drinksahoy
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -37,13 +38,13 @@ class MainActivity : AppCompatActivity(){
         }
 
         //button press connects android to punk api to fetch a random beer data
-        val nextBeerBtn = findViewById<Button>(R.id.button)
+        val nextBeerBtn = findViewById<Button>(R.id.next_btn)
         nextBeerBtn.setOnClickListener {
             callAPI()
             }
 
         //On card click go into more detail on beer.
-        val cardClick = findViewById<CardView>(R.id.beerCard)
+        val cardClick = findViewById<CardView>(R.id.beer_card)
         cardClick.setOnClickListener{
             val intent = Intent(this,MoreInfoMenu::class.java)
             intent.putExtra("beerInfo", currentBeer as Serializable)
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity(){
         foodPair = beerJson
             .getJSONObject(0)
             .getString("food_pairing")
+        foodPair = foodPair?.removePrefix("[")
+        foodPair = foodPair?.removeSuffix("]")
     }
 
     private fun processDesc(beerJson: JSONArray){
@@ -113,7 +116,7 @@ class MainActivity : AppCompatActivity(){
     private fun shortBeerInfo(){
 
         //Display beer image.
-        val imgView = findViewById<ImageView>(R.id.imageView)
+        val imgView = findViewById<ImageView>(R.id.beer_image)
         Picasso
             .get()
             .load(currentBeer.imageUrl)
@@ -121,16 +124,16 @@ class MainActivity : AppCompatActivity(){
 
         //Display beer name
         val nameView = findViewById<TextView>(R.id.name)
-        nameView.text = "Name: ${currentBeer.name}"
+        nameView.text = Html.fromHtml("<b>Name: </b>${currentBeer.name}")
 
         //Display the strength of beer
         //TODO Make sure beer displays strong icon when above 5% abv
         val strengthView = findViewById<TextView>(R.id.strength)
-        strengthView.text = "Strength: ${currentBeer.strength}"
+        strengthView.text = Html.fromHtml("<b>Strength: </b>${currentBeer.strength}")
 
         //Display the tagline of beer.
         val taglineView = findViewById<TextView>(R.id.tagline)
-        taglineView.text = "Tagline: ${currentBeer.tagline}"
+        taglineView.text = Html.fromHtml("<b>Tagline: </b>${currentBeer.tagline}")
     }
 }
 
