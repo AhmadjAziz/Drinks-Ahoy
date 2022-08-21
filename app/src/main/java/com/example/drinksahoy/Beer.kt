@@ -1,5 +1,6 @@
 package com.example.drinksahoy
 
+import android.text.Html
 import java.io.Serializable
 
 /**
@@ -13,5 +14,14 @@ data class Beer(
     var strength: Double? = null,
     var tagline: String? = null,
     var description: String? = null,
-    var foodPair: String? = null
-): Serializable
+    var foodPair: ArrayList<String>? = null
+): Serializable {
+    fun foodPairToString(): String {
+        var output = ""
+        for (i in foodPair!!) {
+            output = output.plus(i)
+            output = output.plus(", ")
+        }
+        return output
+    }
+}

@@ -68,7 +68,7 @@ class MoreInfoMenu : AppCompatActivity() {
 
         //Display the foods that pair with beer
         val foodPairView = findViewById<TextView>(R.id.food_pair)
-        foodPairView.text = Html.fromHtml("<b>Food Pairing: </b>${currentBeer.foodPair}")
+        foodPairView.text = Html.fromHtml("<b>Food Pairing: </b>${currentBeer.foodPairToString()}")
 
     }
 }

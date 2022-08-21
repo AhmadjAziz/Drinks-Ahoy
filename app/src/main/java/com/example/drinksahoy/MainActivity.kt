@@ -1,7 +1,6 @@
 package com.example.drinksahoy
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.text.Html
 import android.widget.Button
@@ -68,11 +67,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun processPair(beerJson: JSONArray) {
-        currentBeer.foodPair = beerJson
-            .getJSONObject(FIRST_INDEX)
-            .getString("food_pairing")
-        currentBeer.foodPair = currentBeer.foodPair?.removePrefix("[")
-        currentBeer.foodPair = currentBeer.foodPair?.removeSuffix("]")
+        val beerPair = beerJson
+        .getJSONObject(FIRST_INDEX)
+            .getJSONArray("food_pairing")
+
+        val list = arrayListOf<String>()
+        for (i in 0 until beerPair.length()) {
+            list.add(beerPair.getString(i))
+        }
+        currentBeer.foodPair = list
     }
 
     private fun processDesc(beerJson: JSONArray) {
