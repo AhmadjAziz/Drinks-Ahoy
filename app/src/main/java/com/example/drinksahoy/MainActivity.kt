@@ -13,17 +13,28 @@ import com.squareup.picasso.Picasso
 import org.json.JSONArray
 import java.io.Serializable
 
-
+/**
+ * The following activity handles communication with the Punk API that can be found at https://punkapi.com/
+ * This consists of connecting, retrieving and processing of beer data.
+ * @author Ahmad Aziz
+ * @since 20/08/2022
+ * @version 1.0
+ */
 class MainActivity : AppCompatActivity() {
 
-    //Variables used to store data on beer.
+    //Variable used to store data on beer.
     private var currentBeer = Beer()
 
+    /**
+     * OnCreate of activity, the app checks for first launch or return from another activity,
+     * based off which data is handled.
+     * @param savedInstanceState reference to a Bundle object that restores activity to a previous state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_menu)
 
-        //displays a random beer onCreate when app is launched
+        //Checking how to populate data. In this case a null indicates the app launching for the first time.
         if (intent.extras == null) {
             callAPI()
         } else {
@@ -37,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             callAPI()
         }
 
-        //On card click go into more detail on beer.
+        //On card click a more detailed card is shown in a new activity.
         val cardClick = findViewById<CardView>(R.id.beer_card)
         cardClick.setOnClickListener {
             val intent = Intent(this, MoreInfoMenu::class.java)
@@ -46,6 +57,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     *Connection to Punk Api is made using ION library (Android Asynchronous Networking and Image Loading)
+     * found at https://github.com/koush/ion
+     */
     private fun callAPI() {
         Ion.with(this)
             .load("https://api.punkapi.com/v2/beers/random")
@@ -53,7 +68,10 @@ class MainActivity : AppCompatActivity() {
             .setCallback { ex, result -> processBeer(result) }
     }
 
-    //Passes data into methods where they can be extracted
+    /**
+     * Serves as an intermediate hub that passes data for processing.
+     * @param beerData contains the JSON data as a string, awaiting to be split.
+     */
     private fun processBeer(beerData: String) {
         val beerJson = JSONArray(beerData)
         processImage(beerJson)
@@ -62,10 +80,13 @@ class MainActivity : AppCompatActivity() {
         processTagline(beerJson)
         processDesc(beerJson)
         processPair(beerJson)
-       // currentBeer = Beer(imageUrl, name, strength, tagline, description, foodPair)
         shortBeerInfo()
     }
 
+    /**
+     * Processes data received to separate food that can be pairs with the specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
     private fun processPair(beerJson: JSONArray) {
         val beerPair = beerJson
         .getJSONObject(FIRST_INDEX)
@@ -78,39 +99,59 @@ class MainActivity : AppCompatActivity() {
         currentBeer.foodPair = list
     }
 
+    /**
+     * Processes data received to separate the description of a specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
     private fun processDesc(beerJson: JSONArray) {
         currentBeer.description = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("description")
     }
 
+    /**
+     * Processes data received to separate the tagline of a specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
     private fun processTagline(beerJson: JSONArray) {
         currentBeer.tagline = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("tagline")
     }
 
-    //processes strength data and extracts it into a string format.
+    /**
+     * Processes data received to separate the strength of a specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
     private fun processStrength(beerJson: JSONArray) {
         currentBeer.strength = beerJson
             .getJSONObject(FIRST_INDEX)
             .getDouble("abv")
     }
 
-    //extracts the name of the beer.
+    /**
+     * Processes data received to separate the name of a specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
     private fun processName(beerJson: JSONArray) {
         currentBeer.name = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("name")
     }
 
-    //extracts image url from the Json array and inserts it into the image view.
+    /**
+     * Processes data received to separate the image of a specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
     private fun processImage(beerJson: JSONArray) {
         currentBeer.imageUrl = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("image_url")
     }
 
+    /**
+     * Fills up the cardView with the processed beer data.
+     */
     private fun shortBeerInfo() {
         //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
