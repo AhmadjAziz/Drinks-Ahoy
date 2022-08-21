@@ -16,6 +16,10 @@ data class Beer(
     var description: String? = null,
     var foodPair: ArrayList<String>? = null
 ): Serializable {
+    /**
+     * Breaks down the foodPair data into a String that can be displayed on the cardView.
+     * @return A string output that contains foodPairs separated by ", ".
+     */
     fun foodPairToString(): String {
         var output = ""
         for (i in foodPair!!) {
