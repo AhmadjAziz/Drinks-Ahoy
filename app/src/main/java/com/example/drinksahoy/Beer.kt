@@ -8,10 +8,10 @@ import java.io.Serializable
  *@since 20/08/2022
  */
 data class Beer(
-    val imageUrl: String? = null,
-    val name: String? = null,
-    val strength: Double? = null,
-    val tagline: String? = null,
-    val description: String? = null,
-    val foodPair: String? = null
+    var imageUrl: String? = null,
+    var name: String? = null,
+    var strength: Double? = null,
+    var tagline: String? = null,
+    var description: String? = null,
+    var foodPair: String? = null
 ): Serializable
