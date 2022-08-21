@@ -1,6 +1,7 @@
 package com.example.drinksahoy
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.text.Html
 import android.widget.Button
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity(){
 
     private fun processPair(beerJson: JSONArray){
         foodPair = beerJson
-            .getJSONObject(0)
+            .getJSONObject(FIRST_INDEX)
             .getString("food_pairing")
         foodPair = foodPair?.removePrefix("[")
         foodPair = foodPair?.removeSuffix("]")
@@ -82,39 +83,38 @@ class MainActivity : AppCompatActivity(){
 
     private fun processDesc(beerJson: JSONArray){
         description = beerJson
-            .getJSONObject(0)
+            .getJSONObject(FIRST_INDEX)
             .getString("description")
     }
 
     private fun processTagline(beerJson: JSONArray){
         tagline = beerJson
-            .getJSONObject(0)
+            .getJSONObject(FIRST_INDEX)
             .getString("tagline")
     }
 
     //processes strength data and extracts it into a string format.
     private fun processStrength(beerJson: JSONArray){
         strength = beerJson
-            .getJSONObject(0)
+            .getJSONObject(FIRST_INDEX)
             .getInt("abv")
     }
 
     //extracts the name of the beer.
     private fun processName(beerJson: JSONArray){
         name = beerJson
-            .getJSONObject(0)
+            .getJSONObject(FIRST_INDEX)
             .getString("name")
     }
 
     //extracts image url from the Json array and inserts it into the image view.
     private fun processImage(beerJson: JSONArray){
         imageUrl = beerJson
-            .getJSONObject(0)
+            .getJSONObject(FIRST_INDEX)
             .getString("image_url")
     }
 
     private fun shortBeerInfo(){
-
         //Display beer image.
         val imgView = findViewById<ImageView>(R.id.beer_image)
         Picasso
@@ -126,6 +126,13 @@ class MainActivity : AppCompatActivity(){
         val nameView = findViewById<TextView>(R.id.name)
         nameView.text = Html.fromHtml("<b>Name: </b>${currentBeer.name}")
 
+        val iconView = findViewById<ImageView>(R.id.warning_icon)
+        if(currentBeer.strength!! > BEER_COMPARATOR){
+            iconView.setImageResource(R.drawable.strong_abv)
+        } else{
+            iconView.setImageDrawable(null)
+        }
+
         //Display the strength of beer
         //TODO Make sure beer displays strong icon when above 5% abv
         val strengthView = findViewById<TextView>(R.id.strength)
@@ -136,5 +143,6 @@ class MainActivity : AppCompatActivity(){
         taglineView.text = Html.fromHtml("<b>Tagline: </b>${currentBeer.tagline}")
     }
 }
+
 
 

@@ -1,7 +1,7 @@
-- Separate food pair (Important)
 - add image for high abv value (important)
 - Add image for beers that return null
 - Kdoc the project
+- put strings like name, tag, abv in strings file.
 
 
 	BONUS FEATURE
