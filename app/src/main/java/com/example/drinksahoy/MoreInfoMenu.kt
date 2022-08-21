@@ -31,19 +31,30 @@ class MoreInfoMenu : AppCompatActivity() {
     }
     private fun fullBearInfo(){
 
-        //Display beer image using Picasso.
+        //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
-        Picasso
-            .get()
-            .load(currentBeer.imageUrl)
-            .into(imgView)
+        if(currentBeer.imageUrl == "null"){
+            imgView.setImageResource(R.drawable.no_image_icon)
+        }else{
+            Picasso
+                .get()
+                .load(currentBeer.imageUrl)
+                .into(imgView)
+        }
 
         //Display beer name
         val nameView = findViewById<TextView>(R.id.name)
         nameView.text = Html.fromHtml("<b>Name: </b>${currentBeer.name}")
 
+        //Displays an icon for beers stronger than 5%
+        val iconView = findViewById<ImageView>(R.id.warning_icon)
+        if (currentBeer.strength!! > BEER_COMPARATOR) {
+            iconView.setImageResource(R.drawable.strong_abv)
+        } else {
+            iconView.setImageDrawable(null)
+        }
+
         //Display the strength of beer
-        //TODO Make sure beer displays strong icon when above 5% abv
         val strengthView = findViewById<TextView>(R.id.strength)
         strengthView.text = Html.fromHtml("<b>Strength: </b>${currentBeer.strength}")
 

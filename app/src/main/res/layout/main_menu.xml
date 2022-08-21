@@ -28,6 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:maxHeight="100dp"
+                android:paddingBottom="10dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -47,10 +49,10 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/warning_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_marginStart="20dp"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:layout_gravity="center" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

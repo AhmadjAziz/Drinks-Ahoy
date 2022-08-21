@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:scaleType="fitCenter">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/beer_card"
@@ -26,7 +27,9 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/beer_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:paddingBottom="10dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -34,10 +37,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/strength"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/strength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/warning_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_gravity="center" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tagline"

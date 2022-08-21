@@ -109,10 +109,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shortBeerInfo() {
-        //Display beer image.
+        //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
-
-        //Checks if api has passed a null as image.
         if(currentBeer.imageUrl == "null"){
             imgView.setImageResource(R.drawable.no_image_icon)
         }else{
