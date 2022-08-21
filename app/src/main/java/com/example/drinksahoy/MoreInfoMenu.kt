@@ -10,32 +10,46 @@ import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import java.io.Serializable
 
+/**
+ * The following activity receives processed beer data from the MainActivity and displays a extended beer description.
+ * @author Ahmad Aziz
+ * @since 21/08/2022
+ * @version 1.0
+ */
 class MoreInfoMenu : AppCompatActivity() {
-
+    //Variable used to store data on beer.
     var currentBeer = Beer()
 
+    /**
+     * OnCreate of activity, fills up the cardView with extended beer information.
+     * @param savedInstanceState reference to a Bundle object that restores activity to a previous state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.more_info_menu)
 
+        //Receives and displays data from the MainActivity.
+        currentBeer = intent.extras!!.get("beerInfo") as Beer
+        fullBearInfo()
+
+        //Returns to the MainActivity and passes the currentBeer data to be displayed.
         val backBtn = findViewById<Button>(R.id.backBtn)
         backBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("beerInfo", currentBeer as Serializable)
             startActivity(intent)
         }
-
-        currentBeer = intent.extras!!.get("beerInfo") as Beer
-        fullBearInfo()
-
     }
-    private fun fullBearInfo(){
 
+    /**
+     * Fills up the cardView with the extended version of the processed beer data.
+     */
+    private fun fullBearInfo(){
         //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
         if(currentBeer.imageUrl == "null"){
             imgView.setImageResource(R.drawable.no_image_icon)
-        }else{
+        } else{
             Picasso
                 .get()
                 .load(currentBeer.imageUrl)
@@ -69,6 +83,5 @@ class MoreInfoMenu : AppCompatActivity() {
         //Display the foods that pair with beer
         val foodPairView = findViewById<TextView>(R.id.food_pair)
         foodPairView.text = Html.fromHtml("<b>Food Pairing: </b>${currentBeer.foodPairToString()}")
-
     }
 }

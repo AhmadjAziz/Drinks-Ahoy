@@ -17,11 +17,10 @@ import java.io.Serializable
  * The following activity handles communication with the Punk API that can be found at https://punkapi.com/
  * This consists of connecting, retrieving and processing of beer data.
  * @author Ahmad Aziz
- * @since 20/08/2022
+ * @since 21/08/2022
  * @version 1.0
  */
 class MainActivity : AppCompatActivity() {
-
     //Variable used to store data on beer.
     private var currentBeer = Beer()
 
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     *Connection to Punk Api is made using ION library (Android Asynchronous Networking and Image Loading)
+     * Connection to Punk Api is made using ION library (Android Asynchronous Networking and Image Loading)
      * found at https://github.com/koush/ion
      */
     private fun callAPI() {
@@ -150,7 +149,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Fills up the cardView with the processed beer data.
+     * Fills up the cardView with the short version of the processed beer data.
      */
     private fun shortBeerInfo() {
         //Displays image passed through api or presents a image not found icon
