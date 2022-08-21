@@ -15,25 +15,25 @@ import org.json.JSONArray
 import java.io.Serializable
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     //Variables used to store data on beer.
     private var imageUrl: String? = null
     private var name: String? = null
-    private var strength: Int? = null
+    private var strength: Double? = null
     private var tagline: String? = null
     private var description: String? = null
     private var foodPair: String? = null
     private var currentBeer = Beer()
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_menu)
 
         //displays a random beer onCreate when app is launched
-        if(intent.extras == null){
+        if (intent.extras == null) {
             callAPI()
-        } else{
+        } else {
             currentBeer = intent.extras!!.get("beerInfo") as Beer
             shortBeerInfo()
         }
@@ -42,18 +42,18 @@ class MainActivity : AppCompatActivity(){
         val nextBeerBtn = findViewById<Button>(R.id.next_btn)
         nextBeerBtn.setOnClickListener {
             callAPI()
-            }
+        }
 
         //On card click go into more detail on beer.
         val cardClick = findViewById<CardView>(R.id.beer_card)
-        cardClick.setOnClickListener{
-            val intent = Intent(this,MoreInfoMenu::class.java)
+        cardClick.setOnClickListener {
+            val intent = Intent(this, MoreInfoMenu::class.java)
             intent.putExtra("beerInfo", currentBeer as Serializable)
             startActivity(intent)
         }
     }
 
-    private fun callAPI(){
+    private fun callAPI() {
         Ion.with(this)
             .load("https://api.punkapi.com/v2/beers/random")
             .asString()
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     //Passes data into methods where they can be extracted
-    private fun processBeer(beerData: String){
+    private fun processBeer(beerData: String) {
         val beerJson = JSONArray(beerData)
         processImage(beerJson)
         processName(beerJson)
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(){
         shortBeerInfo()
     }
 
-    private fun processPair(beerJson: JSONArray){
+    private fun processPair(beerJson: JSONArray) {
         foodPair = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("food_pairing")
@@ -81,40 +81,40 @@ class MainActivity : AppCompatActivity(){
         foodPair = foodPair?.removeSuffix("]")
     }
 
-    private fun processDesc(beerJson: JSONArray){
+    private fun processDesc(beerJson: JSONArray) {
         description = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("description")
     }
 
-    private fun processTagline(beerJson: JSONArray){
+    private fun processTagline(beerJson: JSONArray) {
         tagline = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("tagline")
     }
 
     //processes strength data and extracts it into a string format.
-    private fun processStrength(beerJson: JSONArray){
+    private fun processStrength(beerJson: JSONArray) {
         strength = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getInt("abv")
+            .getDouble("abv")
     }
 
     //extracts the name of the beer.
-    private fun processName(beerJson: JSONArray){
+    private fun processName(beerJson: JSONArray) {
         name = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("name")
     }
 
     //extracts image url from the Json array and inserts it into the image view.
-    private fun processImage(beerJson: JSONArray){
+    private fun processImage(beerJson: JSONArray) {
         imageUrl = beerJson
             .getJSONObject(FIRST_INDEX)
             .getString("image_url")
     }
 
-    private fun shortBeerInfo(){
+    private fun shortBeerInfo() {
         //Display beer image.
         val imgView = findViewById<ImageView>(R.id.beer_image)
         Picasso
@@ -127,9 +127,9 @@ class MainActivity : AppCompatActivity(){
         nameView.text = Html.fromHtml("<b>Name: </b>${currentBeer.name}")
 
         val iconView = findViewById<ImageView>(R.id.warning_icon)
-        if(currentBeer.strength!! > BEER_COMPARATOR){
+        if (currentBeer.strength!! > BEER_COMPARATOR) {
             iconView.setImageResource(R.drawable.strong_abv)
-        } else{
+        } else {
             iconView.setImageDrawable(null)
         }
 
