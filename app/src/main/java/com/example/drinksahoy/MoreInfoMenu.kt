@@ -20,6 +20,10 @@ class MoreInfoMenu : AppCompatActivity() {
     //Variable used to store data on beer.
     var currentBeer = Beer()
 
+    companion object{
+        const val BEER_COMPARATOR = 5.0
+    }
+
     /**
      * OnCreate of activity, fills up the cardView with extended beer information.
      * @param savedInstanceState reference to a Bundle object that restores activity to a previous state.

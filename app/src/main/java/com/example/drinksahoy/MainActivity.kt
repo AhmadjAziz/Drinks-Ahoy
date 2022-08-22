@@ -24,6 +24,11 @@ class MainActivity : AppCompatActivity() {
     //Variable used to store data on beer.
     private var currentBeer = Beer()
 
+    companion object {
+        const val BEER_COMPARATOR = 5.0
+        const val FIRST_INDEX = 0
+    }
+
     /**
      * OnCreate of activity, the app checks for first launch or return from another activity,
      * based off which data is handled.
@@ -99,7 +104,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun processPair(beerJson: JSONArray) {
         val beerPair = beerJson
-        .getJSONObject(FIRST_INDEX)
+            .getJSONObject(FIRST_INDEX)
             .getJSONArray("food_pairing")
 
         val list = arrayListOf<String>()
@@ -165,9 +170,9 @@ class MainActivity : AppCompatActivity() {
     private fun shortBeerInfo() {
         //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
-        if(currentBeer.imageUrl == "null"){
+        if (currentBeer.imageUrl == "null") {
             imgView.setImageResource(R.drawable.no_image_icon)
-        }else{
+        } else {
             Picasso
                 .get()
                 .load(currentBeer.imageUrl)
@@ -197,4 +202,6 @@ class MainActivity : AppCompatActivity() {
         taglineView.text =
             Html.fromHtml("<b>${getString(R.string.tagline)}</b>${currentBeer.tagline}")
     }
+
+
 }
