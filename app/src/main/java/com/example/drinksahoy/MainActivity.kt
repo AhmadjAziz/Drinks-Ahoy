@@ -176,7 +176,8 @@ class MainActivity : AppCompatActivity() {
 
         //Display beer name
         val nameView = findViewById<TextView>(R.id.name)
-        nameView.text = Html.fromHtml("<b>Name: </b>${currentBeer.name}")
+        nameView.text =
+            Html.fromHtml("<b>${getString(R.string.name)}</b> ${currentBeer.name}")
 
         //Displays an icon for beers stronger than 5%
         val iconView = findViewById<ImageView>(R.id.warning_icon)
@@ -188,10 +189,12 @@ class MainActivity : AppCompatActivity() {
 
         //Display the strength of beer
         val strengthView = findViewById<TextView>(R.id.strength)
-        strengthView.text = Html.fromHtml("<b>Strength: </b>${currentBeer.strength}")
+        strengthView.text =
+            Html.fromHtml("<b>${getString(R.string.strength)}</b>${currentBeer.strength}")
 
         //Display the tagline of beer.
         val taglineView = findViewById<TextView>(R.id.tagline)
-        taglineView.text = Html.fromHtml("<b>Tagline: </b>${currentBeer.tagline}")
+        taglineView.text =
+            Html.fromHtml("<b>${getString(R.string.tagline)}</b>${currentBeer.tagline}")
     }
 }

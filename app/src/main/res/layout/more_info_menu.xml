@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/copper"
+        app:cardBackgroundColor="@color/fern"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut"
         app:state_dragged="true">
 
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@string/Return" />
+            android:text="@string/back" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

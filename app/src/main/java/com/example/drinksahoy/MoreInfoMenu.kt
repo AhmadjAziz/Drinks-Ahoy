@@ -29,14 +29,14 @@ class MoreInfoMenu : AppCompatActivity() {
         setContentView(R.layout.more_info_menu)
 
         //Receives and displays data from the MainActivity.
-        currentBeer = intent.extras!!.get("beerInfo") as Beer
+        currentBeer = intent.extras!!.get(getString(R.string.beerInfo)) as Beer
         fullBearInfo()
 
         //Returns to the MainActivity and passes the currentBeer data to be displayed.
         val backBtn = findViewById<Button>(R.id.backBtn)
         backBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("beerInfo", currentBeer as Serializable)
+            intent.putExtra(getString(R.string.beerInfo), currentBeer as Serializable)
             startActivity(intent)
         }
     }
@@ -58,7 +58,7 @@ class MoreInfoMenu : AppCompatActivity() {
 
         //Display beer name
         val nameView = findViewById<TextView>(R.id.name)
-        nameView.text = Html.fromHtml("<b>Name: </b>${currentBeer.name}")
+        nameView.text = Html.fromHtml("<b>${getString(R.string.name)}</b>${currentBeer.name}")
 
         //Displays an icon for beers stronger than 5%
         val iconView = findViewById<ImageView>(R.id.warning_icon)
@@ -70,18 +70,18 @@ class MoreInfoMenu : AppCompatActivity() {
 
         //Display the strength of beer
         val strengthView = findViewById<TextView>(R.id.strength)
-        strengthView.text = Html.fromHtml("<b>Strength: </b>${currentBeer.strength}")
+        strengthView.text = Html.fromHtml("<b>${getString(R.string.strength)}</b>${currentBeer.strength}")
 
         //Display the tagline of beer.
         val taglineView = findViewById<TextView>(R.id.tagline)
-        taglineView.text = Html.fromHtml("<b>Tagline: </b>${currentBeer.tagline}")
+        taglineView.text = Html.fromHtml("<b>${getString(R.string.tagline)}</b>${currentBeer.tagline}")
 
         //Display the description of beer
         val descriptionView = findViewById<TextView>(R.id.description)
-        descriptionView.text = Html.fromHtml("<b>Description: </b>${currentBeer.description}")
+        descriptionView.text = Html.fromHtml("<b>${getString(R.string.description)}</b>${currentBeer.description}")
 
         //Display the foods that pair with beer
         val foodPairView = findViewById<TextView>(R.id.food_pair)
-        foodPairView.text = Html.fromHtml("<b>Food Pairing: </b>${currentBeer.foodPairToString()}")
+        foodPairView.text = Html.fromHtml("<b>${getString(R.string.foodPair)}</b>${currentBeer.foodPairToString()}")
     }
 }

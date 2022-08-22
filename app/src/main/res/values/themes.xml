@@ -3,14 +3,14 @@
     <style name="Theme.DrinksAhoy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="android:textColor">@color/clustered</item>
-        <item name="android:windowBackground">@color/dark_grey</item>
+        <item name="android:windowBackground">@color/clustered</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/garnet</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimary">@color/emerald</item>
+        <item name="colorPrimaryVariant">@color/emerald</item>
         <item name="colorOnPrimary">@color/clustered</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/copper</item>
-        <item name="colorSecondaryVariant">@color/copper</item>
+        <item name="colorSecondary">@color/fern</item>
+        <item name="colorSecondaryVariant">@color/fern</item>
         <item name="colorOnSecondary">@color/clustered</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>

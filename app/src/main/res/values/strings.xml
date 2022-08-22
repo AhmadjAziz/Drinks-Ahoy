@@ -3,6 +3,14 @@
     <string name="app_name">Drinks Ahoy</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="Return">Return</string>
+    <string name="back">Back</string>
+    <string name="download">Download</string>
     <string name="lessInfo">LessInfo</string>
+    <string name="beerInfo">beerInfo</string>
+    <string name="name">Name: </string>
+    <string name="strength">Strength: </string>
+    <string name="tagline">tagline: </string>
+    <string name="description">Description: </string>
+    <string name="foodPair">Food Pair: </string>
+
 </resources>

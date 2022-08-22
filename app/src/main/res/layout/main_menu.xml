@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:clickable="true"
-        app:cardBackgroundColor="@color/copper"
+        app:cardBackgroundColor="@color/fern"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Next" />
+            android:text="@string/next" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/download_btn"
@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
-            android:text="Download" />
+            android:text="@string/download" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
