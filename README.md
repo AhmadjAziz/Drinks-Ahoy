@@ -35,7 +35,5 @@ Bonus feature:
        
 Reviewer Note (22/08/2022):
       As of the date mentioned the app is able to display beer information that conforms to both user study 1 and 2
-      The app has a backend structure using SQLite to store beer information, however true the functionality is yet to be enabled for user on a button click at               the front end.
-      Finally, a Recycler view is to be created for all the downloaded data to be presented to the user. 
-
-       
+      The app has a back-end structure for storing downloaded beer data using SQLite to store beer information, however true the functionality is yet to be enabled for       user via a button click at the front end.
+      Finally, a recycler view is to be created for which the database read functionality can be used to inflate the list.     
