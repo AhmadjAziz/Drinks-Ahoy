@@ -1,4 +1,4 @@
-package com.example.drinksahoy.database
+package com.example.drinksahoy.Database
 
 import android.provider.BaseColumns
 
