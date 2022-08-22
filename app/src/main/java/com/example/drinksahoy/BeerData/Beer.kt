@@ -1,4 +1,4 @@
-package com.example.drinksahoy
+package com.example.drinksahoy.BeerData
 
 import android.text.Html
 import java.io.Serializable

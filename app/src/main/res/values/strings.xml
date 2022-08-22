@@ -7,10 +7,19 @@
     <string name="download">Download</string>
     <string name="lessInfo">LessInfo</string>
     <string name="beerInfo">beerInfo</string>
+    <string name="json_id">id</string>
     <string name="name">Name: </string>
+    <string name="json_name">name</string>
     <string name="strength">Strength: </string>
+    <string name="json_abv">abv</string>
     <string name="tagline">tagline: </string>
+    <string name="json_tagline">tagline</string>
     <string name="description">Description: </string>
-    <string name="foodPair">Food Pair: </string>
+    <string name="json_desc">description</string>
+    <string name="json_food_pairing">food_pairing</string>
+    <string name="food_pair">Food Pair: </string>
+    <string name="json_image_url">image_url</string>
+    <string name="no_img">null</string>
+    <string name="img_url">https://api.punkapi.com/v2/beers/random</string>
 
 </resources>

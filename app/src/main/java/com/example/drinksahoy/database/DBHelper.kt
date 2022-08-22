@@ -4,8 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.drinksahoy.Beer
-import com.example.drinksahoy.FIRST_INDEX
+import com.example.drinksahoy.BeerData.Beer
 
 class DBHelper(context: Context) : SQLiteOpenHelper
     (context, DATABASE_NAME, null, DATABASE_VERSION) {

@@ -1,4 +1,4 @@
-package com.example.drinksahoy
+package com.example.drinksahoy.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.example.drinksahoy.BeerData.Beer
+import com.example.drinksahoy.R
 import com.koushikdutta.ion.Ion
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         if (intent.extras == null) {
             callAPI()
         } else {
-            currentBeer = intent.extras!!.get("beerInfo") as Beer
+            currentBeer = intent.extras!!.get(getString(R.string.beerInfo)) as Beer
             shortBeerInfo()
         }
 
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val cardClick = findViewById<CardView>(R.id.beer_card)
         cardClick.setOnClickListener {
             val intent = Intent(this, MoreInfoMenu::class.java)
-            intent.putExtra("beerInfo", currentBeer as Serializable)
+            intent.putExtra(getString(R.string.beerInfo), currentBeer as Serializable)
             startActivity(intent)
         }
     }
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun callAPI() {
         Ion.with(this)
-            .load("https://api.punkapi.com/v2/beers/random")
+            .load(getString(R.string.img_url))
             .asString()
             .setCallback { ex, result -> processBeer(result) }
     }
@@ -95,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     private fun processID(beerJson: JSONArray) {
         currentBeer.id = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getInt("id")
+            .getInt(getString(R.string.json_id))
     }
 
     /**
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
     private fun processPair(beerJson: JSONArray) {
         val beerPair = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getJSONArray("food_pairing")
+            .getJSONArray(getString(R.string.json_food_pairing))
 
         val list = arrayListOf<String>()
         for (i in 0 until beerPair.length()) {
@@ -121,7 +123,7 @@ class MainActivity : AppCompatActivity() {
     private fun processDesc(beerJson: JSONArray) {
         currentBeer.description = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getString("description")
+            .getString(getString(R.string.json_desc))
     }
 
     /**
@@ -131,7 +133,7 @@ class MainActivity : AppCompatActivity() {
     private fun processTagline(beerJson: JSONArray) {
         currentBeer.tagline = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getString("tagline")
+            .getString(getString(R.string.json_tagline))
     }
 
     /**
@@ -141,7 +143,7 @@ class MainActivity : AppCompatActivity() {
     private fun processStrength(beerJson: JSONArray) {
         currentBeer.strength = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getDouble("abv")
+            .getDouble(getString(R.string.json_abv))
     }
 
     /**
@@ -151,7 +153,7 @@ class MainActivity : AppCompatActivity() {
     private fun processName(beerJson: JSONArray) {
         currentBeer.name = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getString("name")
+            .getString(getString(R.string.json_name))
     }
 
     /**
@@ -161,7 +163,7 @@ class MainActivity : AppCompatActivity() {
     private fun processImage(beerJson: JSONArray) {
         currentBeer.imageUrl = beerJson
             .getJSONObject(FIRST_INDEX)
-            .getString("image_url")
+            .getString(getString(R.string.json_image_url))
     }
 
     /**
@@ -170,7 +172,7 @@ class MainActivity : AppCompatActivity() {
     private fun shortBeerInfo() {
         //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
-        if (currentBeer.imageUrl == "null") {
+        if (currentBeer.imageUrl == getString(R.string.no_img)) {
             imgView.setImageResource(R.drawable.no_image_icon)
         } else {
             Picasso

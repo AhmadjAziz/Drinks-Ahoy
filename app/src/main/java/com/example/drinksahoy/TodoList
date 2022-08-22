@@ -1,10 +1,4 @@
-- put strings like name, tag, abv in strings file.
-
 	BONUS FEATURE
-- Work on a recyclerView(important)
-- use Ion to download data into the recycler view
+- Give download button functionality to connect to the SQLite database.
+- RecyclerView needs functionality
 
-Optional Polish
-- Data is lost on screen rotation. Can fix with android lifecycles, or maybe be lazy and just check
-    check if currentBeer is not null then display it
-- Use dokka for documentation instead

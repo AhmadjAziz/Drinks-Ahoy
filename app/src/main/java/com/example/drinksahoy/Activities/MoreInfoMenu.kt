@@ -1,4 +1,4 @@
-package com.example.drinksahoy
+package com.example.drinksahoy.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.drinksahoy.BeerData.Beer
+import com.example.drinksahoy.R
 import com.squareup.picasso.Picasso
 import java.io.Serializable
 
@@ -51,7 +53,7 @@ class MoreInfoMenu : AppCompatActivity() {
     private fun fullBearInfo(){
         //Displays image passed through api or presents a image not found icon
         val imgView = findViewById<ImageView>(R.id.beer_image)
-        if(currentBeer.imageUrl == "null"){
+        if(currentBeer.imageUrl == getString(R.string.no_img)){
             imgView.setImageResource(R.drawable.no_image_icon)
         } else{
             Picasso
@@ -86,6 +88,6 @@ class MoreInfoMenu : AppCompatActivity() {
 
         //Display the foods that pair with beer
         val foodPairView = findViewById<TextView>(R.id.food_pair)
-        foodPairView.text = Html.fromHtml("<b>${getString(R.string.foodPair)}</b>${currentBeer.foodPairToString()}")
+        foodPairView.text = Html.fromHtml("<b>${getString(R.string.food_pair)}</b>${currentBeer.foodPairToString()}")
     }
 }

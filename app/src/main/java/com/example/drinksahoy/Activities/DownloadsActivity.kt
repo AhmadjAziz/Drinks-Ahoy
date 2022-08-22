@@ -1,7 +1,9 @@
-package com.example.drinksahoy
+package com.example.drinksahoy.Activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.drinksahoy.BeerData.Beer
+import com.example.drinksahoy.R
 
 class DownloadsActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,10 +13,7 @@ class DownloadsActivity : AppCompatActivity(){
     }
 
     private fun populateList(): ArrayList<Beer> {
-        val list = ArrayList<Beer>()
-        //val
-        return list
-
-
+       //TODO Populate the recyclerView to present List of downloaded beer.
+        return ArrayList()
     }
 }
