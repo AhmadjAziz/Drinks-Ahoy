@@ -9,6 +9,7 @@ import java.io.Serializable
  *@since 20/08/2022
  */
 data class Beer(
+    var id: Int? = null,
     var imageUrl: String? = null,
     var name: String? = null,
     var strength: Double? = null,
@@ -27,5 +28,9 @@ data class Beer(
             output = output.plus(", ")
         }
         return output
+    }
+
+    override fun toString(): String {
+        return "$imageUrl,$name,$strength,$tagline,$description,$foodPair"
     }
 }

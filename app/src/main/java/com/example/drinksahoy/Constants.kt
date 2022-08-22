@@ -1,5 +1,7 @@
 package com.example.drinksahoy
 
+import android.provider.BaseColumns
+
 /**
  * A container class for constant values used by the application.
  */

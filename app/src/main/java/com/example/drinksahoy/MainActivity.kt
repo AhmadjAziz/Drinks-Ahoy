@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun processBeer(beerData: String) {
         val beerJson = JSONArray(beerData)
+        processID(beerJson)
         processImage(beerJson)
         processName(beerJson)
         processStrength(beerJson)
@@ -80,6 +81,16 @@ class MainActivity : AppCompatActivity() {
         processDesc(beerJson)
         processPair(beerJson)
         shortBeerInfo()
+    }
+
+    /**
+     * Processes data received to separate ID of the specific beer.
+     * @param beerJson contains list of random beers, off which we are interested in first index.
+     */
+    private fun processID(beerJson: JSONArray) {
+        currentBeer.id = beerJson
+            .getJSONObject(FIRST_INDEX)
+            .getInt("id")
     }
 
     /**
